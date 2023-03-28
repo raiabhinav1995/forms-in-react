@@ -5,20 +5,31 @@ function Login(){
 
     const [password, setPassword]=useState("");
     let [userErr, setUserErr]=useState(false);
+    let [passwordErr, setPasswordErr]=useState(false);
+
     function loginHandle(e){
         e.preventDefault();
     }
     function userHandler(e){
-        let itemLength=e.target.value.length;
+        const itemLength=e.target.value.length;
         if(itemLength<3){
             setUserErr(true);
         }
         else{
             setUserErr(false);
         }
+        setUser(e.target.value);
     }
+
     function passwordHandler(e){
-        console.log(e.target.value);
+        const passwordLength=e.target.value.length;
+        if(passwordLength<3){
+            setPasswordErr(true);
+        }
+        else{
+            setPasswordErr(false);
+        }
+        setPassword(e.target.value);
     }
     return (<div>
         <form onSubmit={loginHandle}>
@@ -28,6 +39,7 @@ function Login(){
         {userErr?<span>User not valid</span>:""}
         <br/><br/>
         <input type="password" placeholder='Enter User Password' onChange={passwordHandler} />
+        {passwordErr?<span>Password not valid</span>:""}
         <br/><br/>
         <button type='submit'>Login</button>
         </form>
